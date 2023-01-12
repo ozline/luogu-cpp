@@ -3,6 +3,11 @@
  * @brief 【深基16.例7】普通二叉树（简化版）
  * @date 2023-01-11
  */
+
+// 实现一个BST，Binary Search Tree，二叉搜索树
+
+// 但是最坏情况是会退化成一条链，这时候搜索复杂度就会达到最大，为了避免这个情况，我们会有了平衡树这一概念
+
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -59,35 +64,114 @@ inline void write(int x) {
 }
 /* END OF TEMPLATE */
 
+
+static int nums;
+
 struct Node
 {
     Node *left, *right;
     int val, cnt, size; // 值 计数 大小
 
-    Node(int x):val(x){};
+    Node(int x):val(x),cnt(1),size(1){};
 
     void insert(int x) // 插入
     {
         this->size++;
-        if(this->val == x) { cnt++; return; }
+        if(this->val == x) { this->cnt++; return; }
 
-        if (x < val)
+        if (x < this->val)
         {
-            if (left == NULL) left = new Node(x);
-            else left->insert(x);
+            if (this->left == NULL) this->left = new Node(x), nums++;
+            else this->left->insert(x);
         }
         else
         {
-            if (right == NULL) right = new Node(x);
-            else right->insert(x);
+            if (this->right == NULL) this->right = new Node(x), nums++;
+            else this->right->insert(x);
         }
+    }
+
+    // 找前驱
+    int query_front(int val, int ans)
+    {
+        if(this->val >= val)
+        {
+            if(this->left == NULL) return ans;
+            else return this->left->query_front(val, ans);
+        }
+        else
+        {
+            if(this->right == NULL) return this->val;
+
+            // 如果当前的节点个数不为零，ans就更新为this->val
+            if(this->cnt != 0) return this->right->query_front(val, this->val);
+            else return this->right->query_front(val, ans);
+        }
+    }
+
+    // 找后继
+    int query_next(int val, int ans)
+    {
+        if(this->val <= val)
+        {
+            if(this->right == NULL) return ans;
+            else return this->right->query_next(val, ans);
+        }
+        else
+        {
+            if(this->left == NULL) return this->val;
+
+            if(this->cnt != 0) return this->left->query_next(val, this->val);
+            else return this->left->query_next(val, ans);
+        }
+    }
+
+    // 按值查找排名（这里返回的是排名 - 1 需要 + 1）
+    int query_rank(int val)
+    {
+        if(this->left == NULL) return 0;
+
+        if(val == this->val) return this->left->size;
+
+        if(val < this->val) return this->left->query_rank(val);
+
+        return (this->right->query_rank(val) + this->left->size + this->cnt);
+    }
+
+    // 按排名查找值
+    int query_val(int rank)
+    {
+        if(this->left == NULL) return 0;
+
+        if(this->left->size >= rank) return this->left->query_val(rank);
+
+        if(this->left->size + this->cnt >= rank) return this->val;
+
+        return this->right->query_val(rank - this->left->size - this->cnt);
     }
 };
 
 Node *tree = NULL;
 
+int n;
+
 void solve()
 {
+
+    n = read(); nums = 0;
+    req(i, 1, n)
+    {
+        int op = read(), x = read();
+        if(op == 5)
+        {
+            if(nums == 0) { nums++; tree = new Node(x); }
+            else tree->insert(x);
+        }
+        else if(op == 1) printf("%d\n", tree->query_rank(x) + 1);
+        else if(op == 2) printf("%d\n", tree->query_val(x));
+        else if(op == 3) printf("%d\n", tree->query_front(x, -INTMAX));
+        else if(op == 4) printf("%d\n", tree->query_next(x, INTMAX));
+    }
     return;
 }
 
