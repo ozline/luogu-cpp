@@ -1,6 +1,6 @@
 /**
  * @author OZLIINEX
- * @brief
+ * @brief 模板
  * @date 2023-01-07
  */
 #include <iostream>
