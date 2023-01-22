@@ -1,7 +1,7 @@
 /**
  * @author OZLIINEX
- * @brief 模板
- * @date 2023-01-07
+ * @brief P3369 【模板】普通平衡树
+ * @date 2023-01-14
  */
 #include <iostream>
 #include <cstdio>
@@ -43,17 +43,17 @@ using namespace std;
 
 inline int read() {
     int x = 0, w = 1; char ch = 0;
-    while(ch < '0' || ch > '9') { if(ch == '-') w = -1; ch = getchar(); }
-    while(ch >= '0' && ch <= '9') { x = x * 10 + (ch - '0'); ch = getchar(); }
-    return(x * w);
+    while (ch < '0' || ch > '9') { if (ch == '-') w = -1; ch = getchar(); }
+    while (ch >= '0' && ch <= '9') { x = x * 10 + (ch - '0'); ch = getchar(); }
+    return (x*w);
 }
 
 inline void write(int x) {
     if(x == 0) { putchar('0'); return; }
-    static int sta[35]; int top = 0;
     if(x<0) putchar('-'), x = -x;
+    static int sta[35]; int top = 0;
     while(x) { sta[top++] = x % 10, x /= 10; }
-    while(top) putchar(sta[--top] + 48);
+    while (top) putchar(sta[--top] + 48);
 }
 /* END OF TEMPLATE */
 

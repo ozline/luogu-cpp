@@ -1,8 +1,28 @@
 /**
  * @author OZLIINEX
- * @brief 模板
- * @date 2023-01-07
+ * @brief P1229 遍历问题
+ * @date 2023-01-21
  */
+
+/**
+ * 前序遍历：根左右
+ * 中序遍历：左根右
+ * 后序遍历：左右根
+ *
+ * 现在给你一个前序遍历和一个后序遍历，求可能的中序遍历的树木
+ * 我们可以注意到，前序遍历的第一个一定是根，后序遍历的第一个也肯定是根
+ *
+ * 同时，只有一个儿子的节点才会在知道前序和后序的情况下有多种中序
+ * 这时候题目就转化成找只有一个子节点的点的数目
+ * 答案是2^i，其中i是这种节点的数目，因为可以放左边也可以放右边嘛
+ *
+ * 我们可以有一个规律，就是，如果先序遍历中的某个元素A的后继是B，如果在后序遍历中B的前驱元素是A，那么A就只有一个结点
+ *
+ * 先序遍历中，如果A只有一个子树B，那么在先序遍历中A一定在B前，在后序遍历中B一定在A前
+ *
+ * 回顾一下，先序遍历：根左右 后序遍历：左右根，如果假设没有右子树，那么先序就是根左，后序就是左根，是吧！
+ */
+
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -18,7 +38,7 @@
 #include <stack>
 #include <unordered_map>
 
-#define DEBUG
+// #define DEBUG
 
 #define MAXN 500001
 #define INF 0x3f3f3f3f
@@ -57,8 +77,22 @@ inline void write(int x) {
 }
 /* END OF TEMPLATE */
 
+string str1, str2;
+int ans;
+
 void solve()
 {
+    cin >> str1 >> str2;
+    int len1 = str1.length();
+    int len2 = str1.length();
+    req(i, 0, len1 - 1)
+    {
+        req(j, 1, len2 - 1)
+        {
+            if(str1[i] == str2[j] && str1[i + 1] == str2[j - 1]) ans++;
+        }
+    }
+    printf("%lld\n", ll(1 << ans));
     return;
 }
 
