@@ -1,3 +1,3 @@
 # luogu-cpp
 
-我的洛谷做题记录，这里记录了我的洛谷刷题情况
+My Luogu record, accept problem by
