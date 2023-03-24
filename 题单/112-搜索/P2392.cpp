@@ -1,6 +1,6 @@
 /**
  * @author OZLIINEX
- * @brief P2392
+ * @brief P2392 kkksc03考前临时抱佛脚 DFS
  * @date 2023-03-18
  */
 #include <iostream>
