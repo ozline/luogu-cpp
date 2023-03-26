@@ -13,14 +13,12 @@ in `list` dictionary, you will find that all folders are formatted as numbers - 
 ```bash
 .
 ├── Makefile
-├── P2249.cpp
 ├── README.md
 ├── etc
-│   └── temp.cpp
 ├── in.in
 ├── out.out
 ├── template.cpp
-└── 题单
+└── list
     ├── 100-顺序结构
     ├── 106-模拟与高精度
     ├── 107-排序

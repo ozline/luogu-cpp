@@ -1,7 +1,7 @@
 /**
  * @author OZLIINEX
- * @brief 模板
- * @date 2023-01-07
+ * @brief
+ * @date 2023-
  */
 #include <iostream>
 #include <cstdio>
