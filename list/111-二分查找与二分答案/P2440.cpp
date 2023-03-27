@@ -1,8 +1,15 @@
 /**
  * @author OZLIINEX
- * @brief
- * @date 2023-0
+ * @brief P2440 木材加工
+ * @date 2023-03-27
  */
+
+
+// 第一次拿了76，WA两个点，看了一下答案，好家伙
+// 比如你有n段，其中n - 1个都很短，最后一个很长
+// 那么你可以直接放弃那n - 1个，只从第n个跑..
+// 把代码中的r = min(r, a[i]) 改成 r = max(r, a[i]) 就过了
+// 草!
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -18,9 +25,9 @@
 #include <stack>
 #include <unordered_map>
 
-#define DEBUG
+// #define DEBUG
 
-#define MAXN 500001
+#define MAXN 200001
 #define INF 0x3f3f3f3f
 #define INFLL 1LL<<60
 #define writespace(a) write(a),putchar(' ')
@@ -58,9 +65,30 @@ inline void write(int x) {
 }
 /* END OF TEMPLATE */
 
+ll n, k;
+int a[MAXN];
+
+int l = 0, r = INF;
+
+ll cal(int x)
+{
+    int res = 0;
+    req(i, 1, n) res += a[i] / x;
+    return res;
+}
+
 void solve()
 {
+    n = read(), k = read();
+    req(i, 1, n) a[i] = read(), r = max(r, a[i]);
 
+    while(l < r)
+    {
+        int mid = (l + r + 1) >> 1;
+        if(cal(mid) >= k) l = mid;
+        else r = mid - 1;
+    }
+    writeln(l);
 }
 
 int main()
@@ -69,7 +97,6 @@ int main()
         freopen("in.in","r",stdin); freopen("out.out","w",stdout);
     #endif
 
-    // fastio();
     solve();
 
     #ifdef DEBUG
