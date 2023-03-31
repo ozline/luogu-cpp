@@ -1,8 +1,16 @@
 /**
  * @author OZLIINEX
- * @brief P1106 删数问题
- * @date 2023-03-29
+ * @brief P4995 跳跳！
+ * @date 2023-03-31
  */
+
+
+// 写一波贪心思考
+// 比如目前有 1 2 我们在地面， ->1->2还是->2->1呢
+// 其实就是 1^2 + 2^2和3^2的比较
+// 很明显，直接3^2更大
+// 所以思路就是左右反复跳
+
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
@@ -18,7 +26,7 @@
 #include <stack>
 #include <unordered_map>
 
-#define DEBUG
+// #define DEBUG
 
 #define MAXN 500001
 #define INF 0x3f3f3f3f
@@ -58,49 +66,34 @@ inline void write(int x) {
 }
 /* END OF TEMPLATE */
 
-int k;
-int a[MAXN], len;
+ll n;
+ll h[MAXN];
+
+ll last = 0;
+ll ans = 0;
 
 void solve()
 {
-    char ch = getchar();
-    while(isdigit(ch))
+    n = read();
+    req(i, 1, n) h[i] = read();
+    sort(h + 1, h + 1 + n);
+    req(i, 1, n)
     {
-        a[++len] = ch - '0';
-        ch = getchar();
+        if(i % 2)
+        {
+            ans += ll(pow(h[n + 1 - (i + 1) / 2] - last, 2));
+            last = h[n + 1 - (i + 1) / 2];
+        }
+        else
+        {
+            ans += ll(pow(h[i / 2] - last, 2));
+            last = h[i / 2];
+        }
     }
 
-    k = read();
+    printf("%lld\n", ans);
 
-    req(i, 2, len - 1)
-    {
-        if(a[i] > a[i - 1] && a[i] > a[i + 1]) a[i] = -1, k--;
-        if(k == 0) break;
-    }
-
-    while(k)
-    {
-        len = unique(a + 1, a + 1 + len) - a - 1;
-        debugvar(len);
-        // req(i, 2, len - 1)
-        // {
-        //     if(a[i] == -1)
-        //     if(a[i] > a[i - 1]) a[i] = -1, k--;
-        //     if(k == 0) break;
-        // }
-        k--;
-    }
-
-    bool flag = false;
-
-    req(i, 1, len)
-    {
-        if(!flag && a[i] != 0) flag = true;
-        if(a[i] == -1) continue;
-        if(flag)putchar(a[i] + 48);
-    }
-
-    if(!flag) putchar('0');
+    // 1: h[n] 2: h[1] 3: h[n - 1] 4: h[2]  5: h[n - 2]
 }
 
 int main()
