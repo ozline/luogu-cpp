@@ -8,31 +8,16 @@ welcome to visit my luogu profile: [https://www.luogu.com.cn/user/70667](https:/
 
 in `list` dictionary, you will find that all folders are formatted as numbers - Chinese, the number represents the id of this list.
 
-i 
-
 # File Tree
 
 ```bash
 .
 ├── Makefile
 ├── README.md
-├── etc
 ├── in.in
 ├── out.out
 ├── template.cpp
-└── list
-    ├── 100-顺序结构
-    ├── 106-模拟与高精度
-    ├── 107-排序
-    ├── 111-二分查找与二分答案
-    ├── 112-搜索
-    ├── 113-线性表
-    ├── 114-二叉树
-    ├── 115-集合
-    ├── 200-前缀和与差分
-    ├── 202-分治
-    ├── 205-二叉堆与ST表
-    ├── 208-最短路
-    ├── 210-连通性问题
-    └── 216-整数与除数
+├── contest	    # questions categorized by different contests
+├── etc	            # questions that cannot be categorized
+└── list.           # luogu training list
 ```
