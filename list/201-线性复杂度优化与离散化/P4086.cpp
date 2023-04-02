@@ -1,26 +1,16 @@
 /**
  * @author OZLIINEX
- * @brief P3143 [USACO16OPEN] Diamond Collector S
- * @date 2023-04-01
+ * @brief P4086 [USACO17DEC]My Cow Ate My Homework S
+ * @date 2023-04-02
  */
 
+// 没那么难，这道题看完题目思路基本就有了
+// 就是处理几个前缀和，然后遍历（也是枚举）
+// 不过是倒着处理，所以也可以叫后缀和？
 
-// 做的蛮久的，一开始用了单调队列，被这个题单坑了！
-// 其实就是双指针题，不过其实也有难度
-
-// 首先，我们既然知道双指针，那么大概率和perfix和suffix有关
-// 我们可以利用一个遍历遍历出每个点i，左边可以取的最大数量，右边可以取的最大数量
-// 然后我们合并计算就可以了
-
-// 好，这个如何合并计算？
-// 思考了很久，就又卡在这了
-
-// 实际上，我们可以利用一点点DP思想，我们的perfix和suffix可以更改定义为
-// perfix[i]: 点i左边的数组中，最大的连续子数组的长度
-// suffix[i]: 点i右边的数组中，最大的连续子数组的长度
-// 然后我们再用一个for加起来不就好了
-
-// 思维提升了很多感觉
+// 需要注意的是，我们需要升序输出所有可能的k的值
+// 也就是说，答案有时候不唯一
+// 而且k不能为0！！
 
 #include <iostream>
 #include <cstdio>
@@ -74,36 +64,39 @@ inline void write(int x) {
     while(top) putchar(sta[--top] + 48);
 }
 /* END OF TEMPLATE */
-ll n, k;
-ll a[MAXN];
 
-ll l, r;
+int n;
+int a[MAXN];
+int minx[MAXN]; // record the min value of a[i] in [i, n]
+double avg[MAXN];  // record the average value of a[i] in [i, n]
+int sum[MAXN];  // record the sum value of a[i] in [i, n]
 
-// 第i个点左边可以取的最大数量，第i个点右边可以取的最大数量
-ll perfix[MAXN], suffix[MAXN];
+double maxavg;
 ll ans;
 
 void solve()
 {
-    n = read(), k = read();
+    n = read();
     req(i, 1, n) a[i] = read();
-    sort(a + 1, a + 1 + n);
-
-    l = 1, r = n;
-    req(i, 1, n)
+    sum[n] = minx[n] = a[n];
+    for(int i = n - 1; i > 0; i--)
     {
-        while(a[i] - a[l] > k) l++;
-        while(a[r] - a[n + 1 - i] > k) r--;
-
-        perfix[i] = max(perfix[i - 1], i - l + 1);
-        suffix[n + 1 - i] = max(suffix[n - i + 2], r - (n + 1 - i) + 1);
+        minx[i] = min(minx[i+1], a[i]);
+        sum[i] = sum[i + 1] + a[i];
     }
 
-    req(i, 1, n) ans = max(ans, perfix[i] + suffix[i + 1]);
+    for(int i = n - 1; i > 0; i--)
+    {
+        avg[i] = double(sum[i] - minx[i]) / (n - i);
+        maxavg = max(maxavg, avg[i]);
+    }
 
-    // debugvar(idxl);
-    // debugvar(idxr);
-    printf("%lld\n", ans);
+    req(i, 2, n)
+    {
+        // debug("avg[%d] = %lf, minx[%d] = %d, sum[%d] = %d\n", i, avg[i], i, minx[i], i, sum[i]);
+        // 有个坑，有多个答案的时候，要每个都输出
+        if(avg[i] == maxavg) printf("%d\n", i - 1);
+    }
 }
 
 int main()

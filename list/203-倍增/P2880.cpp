@@ -1,26 +1,17 @@
 /**
  * @author OZLIINEX
- * @brief P3143 [USACO16OPEN] Diamond Collector S
- * @date 2023-04-01
+ * @brief P2880 [USACO07JAN] Balanced Lineup G
+ * @date 2023-04-02
  */
 
+// 这道题可以用线段树做，但是这是倍增题单里的
+// 考虑到不会ST表，我抄了个题解来学习ST表
 
-// 做的蛮久的，一开始用了单调队列，被这个题单坑了！
-// 其实就是双指针题，不过其实也有难度
+// ST表：sparse-table，是一个用于解决可重复贡献的问题的数据结构
+// 例如，你想要一个多次查询某个区间内的最大值/最小值，就可以用ST表
+// 关于ST表，可以看这个wiki：https://oi-wiki.org/ds/sparse-table/
 
-// 首先，我们既然知道双指针，那么大概率和perfix和suffix有关
-// 我们可以利用一个遍历遍历出每个点i，左边可以取的最大数量，右边可以取的最大数量
-// 然后我们合并计算就可以了
-
-// 好，这个如何合并计算？
-// 思考了很久，就又卡在这了
-
-// 实际上，我们可以利用一点点DP思想，我们的perfix和suffix可以更改定义为
-// perfix[i]: 点i左边的数组中，最大的连续子数组的长度
-// suffix[i]: 点i右边的数组中，最大的连续子数组的长度
-// 然后我们再用一个for加起来不就好了
-
-// 思维提升了很多感觉
+// 倍增的代码意义我觉得可以表述为 maxn[i][k]，其中k表示2^k
 
 #include <iostream>
 #include <cstdio>
@@ -74,36 +65,51 @@ inline void write(int x) {
     while(top) putchar(sta[--top] + 48);
 }
 /* END OF TEMPLATE */
-ll n, k;
-ll a[MAXN];
 
-ll l, r;
+int maxn[180010][22], minn[180010][22];
+int n, m;
 
-// 第i个点左边可以取的最大数量，第i个点右边可以取的最大数量
-ll perfix[MAXN], suffix[MAXN];
-ll ans;
+
+// 替代 std::log 函数
+int logn[180010];
+void init_log()
+{
+    logn[1] = 0;
+    req(i, 2, 180000) logn[i] = logn[i >> 1] + 1;
+}
+
+// 查询[l, r]内最大值和最小值的差
+// 其中查询最大值和查询最小值的可以直接背下来
+int st(int l, int r)
+{
+    int s = logn[r - l + 1], x, y;
+    x = max(maxn[l][s], maxn[r - (1 << s) + 1][s]); // 区间最大
+    y = min(minn[l][s], minn[r - (1 << s) + 1][s]); // 区间最小
+
+    return x - y;
+}
 
 void solve()
 {
-    n = read(), k = read();
-    req(i, 1, n) a[i] = read();
-    sort(a + 1, a + 1 + n);
+    init_log();
+    n = read(), m = read();
 
-    l = 1, r = n;
-    req(i, 1, n)
+    req(i, 1, n) maxn[i][0] = minn[i][0] = read();
+
+    // 这里的21表示的是2^21，我们要保证这个上界比数据范围大
+    req(i, 1, 21) req(j, 1, n - (1 << i) + 1)
     {
-        while(a[i] - a[l] > k) l++;
-        while(a[r] - a[n + 1 - i] > k) r--;
-
-        perfix[i] = max(perfix[i - 1], i - l + 1);
-        suffix[n + 1 - i] = max(suffix[n - i + 2], r - (n + 1 - i) + 1);
+        // 可以直接背
+        maxn[j][i] = max(maxn[j][i - 1], maxn[j + (1 << (i - 1))][i - 1]);
+        minn[j][i] = min(minn[j][i - 1], minn[j + (1 << (i - 1))][i - 1]);
     }
 
-    req(i, 1, n) ans = max(ans, perfix[i] + suffix[i + 1]);
-
-    // debugvar(idxl);
-    // debugvar(idxr);
-    printf("%lld\n", ans);
+    // 开始查询
+    req(i, 1, m)
+    {
+        int l = read(), r = read();
+        writeln(st(l, r));
+    }
 }
 
 int main()

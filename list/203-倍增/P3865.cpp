@@ -1,26 +1,11 @@
 /**
  * @author OZLIINEX
- * @brief P3143 [USACO16OPEN] Diamond Collector S
- * @date 2023-04-01
+ * @brief P3865 【模板】ST 表
+ * @date 2023-04-02
  */
 
-
-// 做的蛮久的，一开始用了单调队列，被这个题单坑了！
-// 其实就是双指针题，不过其实也有难度
-
-// 首先，我们既然知道双指针，那么大概率和perfix和suffix有关
-// 我们可以利用一个遍历遍历出每个点i，左边可以取的最大数量，右边可以取的最大数量
-// 然后我们合并计算就可以了
-
-// 好，这个如何合并计算？
-// 思考了很久，就又卡在这了
-
-// 实际上，我们可以利用一点点DP思想，我们的perfix和suffix可以更改定义为
-// perfix[i]: 点i左边的数组中，最大的连续子数组的长度
-// suffix[i]: 点i右边的数组中，最大的连续子数组的长度
-// 然后我们再用一个for加起来不就好了
-
-// 思维提升了很多感觉
+// st表模板题
+// 好好背吧！
 
 #include <iostream>
 #include <cstdio>
@@ -37,7 +22,7 @@
 #include <stack>
 #include <unordered_map>
 
-#define MAXN 500001
+#define MAXN 200001
 #define INF 0x3f3f3f3f
 #define INFLL 1LL<<60
 #define writespace(a) write(a),putchar(' ')
@@ -74,36 +59,42 @@ inline void write(int x) {
     while(top) putchar(sta[--top] + 48);
 }
 /* END OF TEMPLATE */
-ll n, k;
-ll a[MAXN];
 
-ll l, r;
+const int p = 21;
 
-// 第i个点左边可以取的最大数量，第i个点右边可以取的最大数量
-ll perfix[MAXN], suffix[MAXN];
-ll ans;
+int n, m;
+int maxn[MAXN][p];
+int logn[MAXN];
+
+
+void init_log()
+{
+    logn[1] = 0;
+    req(i, 2, MAXN) logn[i] = logn[i >> 1] + 1;
+}
+
+int st(int l, int r)
+{
+    int k = logn[r - l + 1];
+    return max(maxn[l][k], maxn[r - (1 << k) + 1][k]);
+}
 
 void solve()
 {
-    n = read(), k = read();
-    req(i, 1, n) a[i] = read();
-    sort(a + 1, a + 1 + n);
+    init_log();
+    n = read(), m = read();
+    req(i, 1, n) maxn[i][0] = read();
 
-    l = 1, r = n;
-    req(i, 1, n)
+    req(i, 1, p) req(j, 1, n - (1 << i) + 1)
     {
-        while(a[i] - a[l] > k) l++;
-        while(a[r] - a[n + 1 - i] > k) r--;
-
-        perfix[i] = max(perfix[i - 1], i - l + 1);
-        suffix[n + 1 - i] = max(suffix[n - i + 2], r - (n + 1 - i) + 1);
+        maxn[j][i] = max(maxn[j][i - 1], maxn[j + (1 << (i - 1))][i - 1]);
     }
 
-    req(i, 1, n) ans = max(ans, perfix[i] + suffix[i + 1]);
-
-    // debugvar(idxl);
-    // debugvar(idxr);
-    printf("%lld\n", ans);
+    req(i, 1, m)
+    {
+        int l = read(), r = read();
+        writeln(st(l, r));
+    }
 }
 
 int main()
