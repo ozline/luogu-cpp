@@ -99,7 +99,7 @@ void solve()
     scanf("%d%d", &n, &x); x <<= 1;
     req(i, 1, n - 1) scanf("%d", &a[i]), perfix[i] = perfix[i - 1] + a[i];
 
-    l = 1, r = n - 1;
+    l = 1, r = n;
 
     while(l < r)
     {

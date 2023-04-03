@@ -7,7 +7,8 @@
 // 这道题是扫描线学习题，不是自己做的，在做了P1496的离散化后决定巩固一下
 // Ref: https://ofnoname.blog.luogu.org/solution-p1884
 
-// 思路是
+// 参考题解：https://www.luogu.com.cn/blog/happy404/solution-p5490
+// 扫描线模板：P5490
 
 #include <iostream>
 #include <cstdio>
@@ -90,6 +91,7 @@ struct Segtree
     }
 };
 
+// 扫描线
 struct Node
 {
     // x: 横坐标，y1: 纵坐标下界，y2: 纵坐标上界, c: 1=左端点，-1=右端点
