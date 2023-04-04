@@ -4,6 +4,7 @@
         "ios": "cpp",
         "queue": "cpp",
         "stack": "cpp",
-        "cstring": "cpp"
+        "cstring": "cpp",
+        "unordered_map": "cpp"
     }
 }

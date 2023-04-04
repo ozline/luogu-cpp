@@ -16,7 +16,7 @@ in `list` dictionary, you will find that all folders are formatted as numbers - 
 ├── README.md
 ├── in.in
 ├── out.out
-├── template.cpp
+├── template        # Any templates
 ├── contest	    # questions categorized by different contests
 ├── etc	            # questions that cannot be categorized
 └── list.           # luogu training list
