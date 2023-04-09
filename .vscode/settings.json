@@ -6,6 +6,7 @@
         "stack": "cpp",
         "cstring": "cpp",
         "unordered_map": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "ostream": "cpp"
     }
 }
