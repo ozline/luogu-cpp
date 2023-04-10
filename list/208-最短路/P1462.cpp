@@ -135,7 +135,7 @@ bool SPFA(ll top)
 
         int now = node.node;
 
-        vis[now] = true;
+        // vis[now] = true;
 
         for(int i = head[now]; ~i; i = edge[i].next)
         {
