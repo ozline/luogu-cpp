@@ -74,38 +74,12 @@ inline void writespace(T x)
 }
 /* END OF TEMPLATE */
 
-int main()
+void solve()
 {
-    #ifdef DEBUG
-    freopen("in.in","r",stdin);
-    freopen("out.out","w",stdout);
-    clock_t start,finish;
-    double totaltime;
-    start = clock();
-    #endif
-
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(0);
-
-    /*START*/
-
     int a,b,c;
     read(a),read(b),read(c);
 
     int ans = a*0.2 + b*0.3 + c*0.5;
 
     writeln(ans);
-
-
-    /*END*/
-
-    #ifdef DEBUG
-    finish = clock();
-    totaltime = (double)(finish-start)/CLOCKS_PER_SEC*1000;
-    printf("\n耗时: %.6lf ms\n",totaltime);
-    fclose(stdin);
-    fclose(stdout);
-    #endif
-
-    return 0;
 }

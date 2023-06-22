@@ -6,21 +6,8 @@
 
 //使用优先队列优化+自定义结构体
 
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <algorithm>
-#include <cmath>
-#include <queue>
-#include <vector>
-
+#include "header.hpp"
 #define MAXN 100001
-#define INF 2147483647
-
-using namespace std;
-
-typedef long long ll;
 
 //边
 struct Edge
@@ -86,7 +73,7 @@ void Dijkstra(int startNode)
     }
 }
 
-int main()
+void solve()
 {
     scanf("%d %d %d", &n, &m,&s);
     for (int i = 0; i < m; i++)

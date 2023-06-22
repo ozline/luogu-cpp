@@ -3,31 +3,9 @@
  * @brief 部分函数
  * @date 2022-07-29
  */
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cmath>
-#include <cstring>
-#include <algorithm>
-#include <queue>
-#include <map>
-#include <set>
-#include <vector>
-#include <sstream>
-#include <ctime>
-#include <stack>
-#include <unordered_map>
 
-#define DEBUG
-#define MAXN 500001
-#define INF 0x3f3f3f3f
-#define INFLL ( 1LL<<60 )
-#define debug(...) fprintf(stdout,__VA_ARGS__)
-
-typedef long long ll;
-using namespace std;
-
-/* END OF TEMPLATE */
+#include "header.hpp"
+#define MAXN 100001
 
 int n = MAXN; //这里指maxn
 int a[MAXN]; //需要离散化数组

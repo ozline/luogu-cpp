@@ -4,19 +4,7 @@
  * @date 2022-07-25
  */
 
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cmath>
-#include <cstring>
-#include <algorithm>
-#include <queue>
-#include <map>
-#include <set>
-#include <vector>
-#include <sstream>
-#include <ctime>
-#include <stack>
+#include "header.hpp"
 
 
 /*

@@ -4,18 +4,8 @@
  * @date 2022-04-28
  */
 
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <algorithm>
-#include <cmath>
-
+#include "header.hpp"
 #define MAXN 100001
-
-using namespace std;
-
-typedef long long ll;
 
 pair<ll, ll> node[MAXN]; // first：根节点位置 second:与根节点的关系（0=同类，1=吃，2=被吃）
 
@@ -53,7 +43,7 @@ void Union(ll x,ll y,ll d){
     node[fy].second = (node[x].second - node[y].second + 3 + (d - 1)) % 3; //更新节点关系
 }
 
-int main()
+void solve()
 {
     ll n, k;
     ll aniType, aniX, aniY; //种类，动物1和2  1=同类 2=X吃Y

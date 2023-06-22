@@ -184,7 +184,6 @@ void solve()
 
     puts("No");
     return;
-
 }
 
 int main()

@@ -40,32 +40,9 @@
 
 */
 
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cmath>
-#include <cstring>
-#include <algorithm>
-#include <queue>
-#include <map>
-#include <set>
-#include <vector>
-#include <sstream>
-#include <ctime>
-#include <stack>
-
+#include "header.hpp"
 #define MAXN 500001
-#define INF 0x3f3f3f3f
 #define MOD 100003
-
-typedef long long ll;
-
-// #define DEBUG
-
-using namespace std;
-/*
-    END OF TEMPLATE
-    */
 
 
 
@@ -148,20 +125,8 @@ int calculate_ans(int x)
 
 int n,m;
 
-int main()
+void solve()
 {
-    #ifdef DEBUG
-    freopen("in.in","r",stdin);
-
-    clock_t start,finish;
-    double totaltime;
-    start = clock();
-    #endif
-
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(0);
-    /*START*/
-
     init();
 
     cin>>n>>m;
@@ -180,15 +145,4 @@ int main()
     {
         cout<<(ans[i]>0? ans[i]:calculate_ans(i))<<endl;
     }
-
-    /*END*/
-    #ifdef DEBUG
-
-    finish = clock();
-    totaltime = (double)(finish-start)/CLOCKS_PER_SEC*1000;
-    printf("\n耗时: %.6lf ms\n",totaltime);
-    fclose(stdin);
-    #endif
-
-    return 0;
 }

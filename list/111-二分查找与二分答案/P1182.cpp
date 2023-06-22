@@ -112,18 +112,3 @@ void solve()
     printf("%lld\n", l);
 
 }
-
-int main()
-{
-    #ifdef DEBUG
-        freopen("in.in","r",stdin); freopen("out.out","w",stdout);
-    #endif
-
-    // fastio();
-    solve();
-
-    #ifdef DEBUG
-        fclose(stdin); fclose(stdout);
-    #endif
-    return 0;
-}

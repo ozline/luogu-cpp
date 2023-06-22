@@ -8,49 +8,11 @@
 //Prim模板题？
 
 
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cmath>
-#include <cstring>
-#include <algorithm>
-#include <queue>
-#include <map>
-#include <set>
-#include <vector>
-#include <sstream>
-#include <ctime>
-#include <stack>
-
+#include "header.hpp"
 #define MAXN 401
-#define INF 0x3f3f3f3f
 
-#define debug(...) fprintf(stdout,__VA_ARGS__)
-
-typedef long long ll;
-
-// #define DEBUG
-
-using namespace std;
-/*
-    END OF TEMPLATE
-    */
-
-int main()
+void solve()
 {
-    #ifdef DEBUG
-    freopen("in.in","r",stdin);
-    freopen("out.out","w",stdout);
-    clock_t start,finish;
-    double totaltime;
-    start = clock();
-    #endif
-
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(0);
-
-    /*START*/
-
     int n,m;
     cin>>n>>m;
     int t[MAXN];
@@ -123,17 +85,4 @@ int main()
 
         cout<<dis[x][y]<<endl;
     }
-
-
-    /*END*/
-
-    #ifdef DEBUG
-    finish = clock();
-    totaltime = (double)(finish-start)/CLOCKS_PER_SEC*1000;
-    printf("\n耗时: %.6lf ms\n",totaltime);
-    fclose(stdin);
-    fclose(stdout);
-    #endif
-
-    return 0;
 }
