@@ -34,7 +34,7 @@ after installing the plugin, we should modify and settings in `settings.json`.
 
 find and modify it:
 
-```json
+```yaml
 "code-runner.executorMap": {
     "cpp": "cd $dir \
         && g++ $fullFileName -o $workspaceRoot/main -D DEBUG -I $workspaceRoot/include \
