@@ -8,7 +8,8 @@
         "unordered_map": "cpp",
         "set": "cpp",
         "ostream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "cmath": "cpp"
     },
     "C_Cpp.default.compilerPath": "/usr/bin/clang++",
 }
