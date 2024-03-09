@@ -50,10 +50,10 @@ void solve()
     int a[MAXN];
     int index = 1; //index维护入堆的下标，可以注意到index一直在递增
 
-    for(int i=1;i<=m;i++) read(a[i]);
+    for(int i=1;i<=m;i++) a[i] = read();
     for(int i=1;i<=n;i++)
     {
-        read(q);
+        q = read();
         for(int j=index;j<=q;j++) //这部分模拟ADD操作
         {
             Q.push(a[j]);

@@ -9,7 +9,9 @@
         "set": "cpp",
         "ostream": "cpp",
         "iostream": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "cstdlib": "cpp",
+        "ctime": "cpp"
     },
     "C_Cpp.default.compilerPath": "/usr/bin/clang++",
 }
